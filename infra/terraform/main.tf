@@ -22,7 +22,8 @@ resource "azurerm_linux_web_app" "app" {
   virtual_network_subnet_id = azurerm_subnet.subnet.id
 
   site_config {
-    ftps_state = "AllAllowed"
+    ftps_state             = "AllAllowed"
+    vnet_route_all_enabled = true
   }
 }
 

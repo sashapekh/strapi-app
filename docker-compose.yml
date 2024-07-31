@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: infra/app/Dockerfile.prod
+    image: strapi:latest
     restart: unless-stopped
     env_file: .env
     environment:
@@ -16,7 +17,7 @@ services:
       JWT_SECRET: ${JWT_SECRET:-strapi}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-strapi}
       APP_KEYS: ${APP_KEYS:-}
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: ${NODE_ENV:-production}
     volumes:
       - ./config:/opt/app/config
       - ./src:/opt/app/src
