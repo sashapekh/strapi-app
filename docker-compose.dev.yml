@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: infra/app/Dockerfile.dev
+    image: strapi:latest
     restart: unless-stopped
     env_file: .env
     environment:
@@ -26,7 +27,7 @@ services:
       - ./public/uploads:/opt/app/public/uploads
       - /opt/app/node_modules
     ports:
-      - "1337:1337"
+      - "80:80"
     networks:
       - strapi
     depends_on:
