@@ -16,8 +16,8 @@ resource "azurerm_cosmosdb_postgresql_cluster" "db" {
 }
 
 resource "azurerm_cosmosdb_postgresql_firewall_rule" "cpfr" {
-  name             = "webapprule"
+  name             = "AllowAll"
   cluster_id       = azurerm_cosmosdb_postgresql_cluster.db.id
-  start_ip_address = azurerm_public_ip.pip.ip_address
-  end_ip_address   = azurerm_public_ip.pip.ip_address
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "255.255.255.255"
 }

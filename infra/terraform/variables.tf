@@ -8,7 +8,6 @@ variable "admin_password" {
   sensitive   = true
 }
 
-
 variable "docker_reg_user" {
   description = "Docker registry username"
   type        = string
