@@ -55,7 +55,7 @@ resource "azurerm_public_ip" "pip" {
 resource "azurerm_nat_gateway" "ng" {
   name                    = "straping"
   resource_group_name     = azurerm_resource_group.rg.name
-  location                = azurerm_resource_group.rg.id
+  location                = azurerm_resource_group.rg.location
   sku_name                = "Standard"
   idle_timeout_in_minutes = 10
 }

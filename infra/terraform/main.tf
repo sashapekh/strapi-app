@@ -1,4 +1,3 @@
-
 resource "azurerm_resource_group" "rg" {
   name     = "rg-strapi"
   location = var.location
@@ -22,8 +21,31 @@ resource "azurerm_linux_web_app" "app" {
   virtual_network_subnet_id = azurerm_subnet.subnet.id
 
   site_config {
+    always_on              = true
     ftps_state             = "AllAllowed"
     vnet_route_all_enabled = true
+    application_stack {
+      docker_image_name        = "stripeacr.azurecr.io/strapi:latest"
+      docker_registry_username = var.docker_reg_user
+      docker_registry_password = var.docker_reg_pass
+    }
+  }
+  app_settings = {
+    "HOST"                     = "0.0.0.0"
+    "PORT"                     = "80"
+    "APP_KEYS"                 = "mPZeXNnr+q4cs2dShOaBwg==,0JjeZCQ7oIQloB9QnnTPvQ==,5zmS/GNbMsYRzYVcQgtQOg==,nOmaJsZ/6d3Jm83K3HsK0A=="
+    "API_TOKEN_SALT"           = "SBuWQIVBlibNLPr8YojKqA=="
+    "ADMIN_JWT_SECRET"         = "ktQfxrQimDmoXZVjsAnsQA=="
+    "TRANSFER_TOKEN_SALT"      = "owUmsQwFXRBjafRON1vIrw=="
+    "JWT_SECRET"               = "YyWZOpXmh7tTkba33VPFYA=="
+    "DATABASE_CLIENT"          = "postgres"
+    "DATABASE_URL"             = var.postgre_connect_url
+    "NODE_ENV"                 = "production"
+    "WEBSITE_RUN_FROM_PACKAGE" = "1"
+  }
+
+  identity {
+    type = "SystemAssigned"
   }
 }
 

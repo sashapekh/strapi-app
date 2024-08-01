@@ -2,7 +2,7 @@ resource "azurerm_cosmosdb_postgresql_cluster" "db" {
   name                                 = "stripedb"
   resource_group_name                  = azurerm_resource_group.rg.name
   location                             = azurerm_resource_group.rg.location
-  administrator_login_password         = "966JB4R6EQQfzWMxUAnh"
+  administrator_login_password         = var.admin_password
   coordinator_server_edition           = "BurstableMemoryOptimized"
   node_server_edition                  = "MemoryOptimized"
   coordinator_storage_quota_in_mb      = 32768
@@ -20,4 +20,9 @@ resource "azurerm_cosmosdb_postgresql_firewall_rule" "cpfr" {
   cluster_id       = azurerm_cosmosdb_postgresql_cluster.db.id
   start_ip_address = azurerm_public_ip.pip.ip_address
   end_ip_address   = azurerm_public_ip.pip.ip_address
+}
+
+
+output "postgre_server_name" {
+  value = azurerm_cosmosdb_postgresql_cluster.db.servers[0].fullyQualifiedDomainName
 }
