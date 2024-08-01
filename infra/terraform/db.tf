@@ -21,8 +21,3 @@ resource "azurerm_cosmosdb_postgresql_firewall_rule" "cpfr" {
   start_ip_address = azurerm_public_ip.pip.ip_address
   end_ip_address   = azurerm_public_ip.pip.ip_address
 }
-
-
-output "postgre_server_name" {
-  value = azurerm_cosmosdb_postgresql_cluster.db.servers[0].fullyQualifiedDomainName
-}

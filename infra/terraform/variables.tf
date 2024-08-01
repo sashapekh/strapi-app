@@ -20,8 +20,7 @@ variable "docker_reg_pass" {
   type        = string
   sensitive   = true
 }
-
-variable "postgre_connect_url" {
-  default = "postgresql://citus:${var.admin_password}@${azurerm_cosmosdb_postgresql_cluster.db.servers[0].fullyQualifiedDomainName}:5432citus?sslmode=require"
+locals {
+  postgre_connect_url = "postgresql://citus:${var.admin_password}@${azurerm_cosmosdb_postgresql_cluster.db.servers[0].fqdn}:5432/citus?sslmode=require"
 }
 

@@ -39,7 +39,7 @@ resource "azurerm_linux_web_app" "app" {
     "TRANSFER_TOKEN_SALT"      = "owUmsQwFXRBjafRON1vIrw=="
     "JWT_SECRET"               = "YyWZOpXmh7tTkba33VPFYA=="
     "DATABASE_CLIENT"          = "postgres"
-    "DATABASE_URL"             = var.postgre_connect_url
+    "DATABASE_URL"             = local.postgre_connect_url
     "NODE_ENV"                 = "production"
     "WEBSITE_RUN_FROM_PACKAGE" = "1"
   }
